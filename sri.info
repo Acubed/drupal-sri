@@ -1,0 +1,6 @@
+name = SubResource Integrity
+description = Adds a checksum assertion to embed links (stylesheets and scripts) for security purposes
+core = 7.x
+; Take your pick
+license = Unlicense <http://unlicense.org>
+license = CC0 <https://creativecommons.org/publicdomain/zero/1.0/>

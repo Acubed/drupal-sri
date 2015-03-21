@@ -1,0 +1,22 @@
+<?php
+
+//function sri_element_info(&$element){
+//	return array('styles' => array('#pre_render' => array('sri_element_info_pre_render')));
+//}
+
+function sri_element_info_alter(&$element){
+	// Process the result after drupal_pre_render_styles
+	array_push($element['styles']['#pre_render'], 'sri_element_info_pre_render');
+}
+
+function sri_element_info_pre_render(&$info){
+	foreach($info as $n=>$element){
+		if(isset($element['#tag']) && $element['#tag']=='link'){
+			preg_match('/css_([0-9a-zA-Z_-]*)\.css$/', $element['#attributes']['href'], $match);
+			if($match){
+				$info[$n]['#attributes']['integrity'] = 'ni:///sha-256;'.$match[1];
+			}
+		}
+	}
+	return $info;
+}
